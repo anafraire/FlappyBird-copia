@@ -35,4 +35,5 @@ public class Mario extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 	}
+	
 }
