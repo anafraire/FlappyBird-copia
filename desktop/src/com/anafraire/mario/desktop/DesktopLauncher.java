@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = Mario.ANCHURA;
 		config.height = Mario.ALTURA;
-		config.title = Mario.TITULO;
+		//config.title = Mario.TITULO;
 		new LwjglApplication(new Mario(), config);
 	}
 }
