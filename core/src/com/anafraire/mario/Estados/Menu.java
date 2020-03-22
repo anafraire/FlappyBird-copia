@@ -1,6 +1,6 @@
 package com.anafraire.mario.Estados;
 
-import com.anafraire.mario.Mario;
+import com.anafraire.mario.FlappyBird;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,7 +21,7 @@ public class Menu extends Estado{
     @Override
     public void handleInput() { //Cuando interactuamos con el juego, ej: clic
         if (Gdx.input.justTouched()){
-            gsm.set(new EstadoJuego(gsm));
+            gsm.set(new EstadoJuego_Escena(gsm));
             dispose();
         }
     }
@@ -37,8 +37,8 @@ public class Menu extends Estado{
     //    Gdx.gl.glClearColor(0,0,1,1);
     //    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);   //Resetea la pantalla
         spriteBatch.begin();
-        spriteBatch.draw(fondo, 0, 0, Mario.ANCHURA, Mario.ALTURA);
-        spriteBatch.draw(boton, (Mario.ANCHURA/2) - (boton.getWidth()/2), (Mario.ALTURA/2) - (boton.getHeight())/2);
+        spriteBatch.draw(fondo, 0, 0, FlappyBird.ANCHURA, FlappyBird.ALTURA); //pantalla inicial
+        spriteBatch.draw(boton, (FlappyBird.ANCHURA/2) - (boton.getWidth()/2), (FlappyBird.ALTURA/2) - (boton.getHeight())/2);
         spriteBatch.end();
 
     }

@@ -7,11 +7,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Mario extends ApplicationAdapter {
+public class FlappyBird extends ApplicationAdapter {
 
 	public static final int ANCHURA = 700;
 	public static final int ALTURA = 400;
-	//public static final String TITULO = "Mario Bros Falsete";
+	//public static final String TITULO = "FlappyBird Bros Falsete";
 
 	public AdminEstadosJuego gsm;
 	private SpriteBatch batch;
