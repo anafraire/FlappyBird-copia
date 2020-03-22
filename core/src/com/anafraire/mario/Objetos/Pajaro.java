@@ -17,10 +17,29 @@ public class Pajaro {
     }
 
     public void update(float deltaTime) {
+        if(posicion.y > 0){ //Limitar la pantalla 1
+            velocidad.add(0, GRAVEDAD, 0);
+        }
         velocidad.add(0, GRAVEDAD, 0);  //El objeto caerá a la velocidad de la gravedad
         velocidad.scl(deltaTime);  //Actualiza cada segundo
         posicion.add(0, velocidad.y, 0);  //Velocidad en y
+
+        if(posicion.y < 0){ //Limitar la pantalla 1
+            posicion.y = 0;
+        }
+
         velocidad.scl(1/deltaTime); //Actualiza cada segundo que pasa del deltaTime
     }
 
+    public Vector3 getPosicion() {
+        return posicion;
+    }
+
+    public Texture getPajaro() {
+        return pajaro;
+    }
+
+    public void saltar(){
+        velocidad.y = 300;
+    }
 }
