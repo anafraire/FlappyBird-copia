@@ -9,6 +9,7 @@ public class Pajaro {
     private Vector3 posicion;
     private Vector3 velocidad;
     private Texture pajaro;
+    private static final int V_MOVIMIENTO = 100;    //  Velocidad de movimiento
 
     public Pajaro(int x, int y) {
         posicion = new Vector3 (x, y, 0);
@@ -22,7 +23,7 @@ public class Pajaro {
         }
         velocidad.add(0, GRAVEDAD, 0);  //El objeto caerá a la velocidad de la gravedad
         velocidad.scl(deltaTime);  //Actualiza cada segundo
-        posicion.add(0, velocidad.y, 0);  //Velocidad en y
+        posicion.add(V_MOVIMIENTO * deltaTime, velocidad.y, 0);  //Velocidad en y   //Por cada segundo se va a mover V_MOVIMIENTO =100 pixeles
 
         if(posicion.y < 0){ //Limitar la pantalla 1
             posicion.y = 0;
