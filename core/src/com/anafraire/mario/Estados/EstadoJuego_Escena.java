@@ -43,7 +43,9 @@ public class EstadoJuego_Escena extends Estado{
 
         camara.position.x = pajaro.getPosicion().x + 80;    //camara del juego
 
-        for(Tuberia tuberia : tuberias){
+        for(int i=0; i < tuberias.size; i++){
+            Tuberia tuberia = tuberias.get(i);
+
             //Posicion del tubo de arriba
             if(camara.position.x - (camara.viewportHeight/2) > tuberia.getPosicionTopTuberia().x + tuberia.getTopTuberia().getWidth()){
                 tuberia.reposicion(tuberia.getPosicionTopTuberia().x + (Tuberia.ANCHURA_TUBERIA + ESPACIO_TUBERIAS) * CONTADOR_TUBERIAS);
@@ -73,6 +75,11 @@ public class EstadoJuego_Escena extends Estado{
 
     @Override
     public void dispose() {
-
+        fondo2.dispose();
+        pajaro.dispose();
+        for(Tuberia tuberia : tuberias){
+            tuberia.dispose();
+        }
+        System.out.println("ESTADO DE JUEGO DISPONIBLE");
     }
 }
