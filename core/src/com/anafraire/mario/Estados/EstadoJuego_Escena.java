@@ -6,6 +6,7 @@ import com.anafraire.mario.Objetos.Tuberia;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 public class EstadoJuego_Escena extends Estado{
@@ -16,12 +17,18 @@ public class EstadoJuego_Escena extends Estado{
     private static final int ESPACIO_TUBERIAS = 125;
     private static final int CONTADOR_TUBERIAS = 5;
     private Array <Tuberia> tuberias;
+    private Texture suelo;
+    private Vector2 posicionSuelo1; //Posicion del suelo primera vez
+    private Vector2 posicionSuelo2; //Posicion del suelo segunda vez
 
     public EstadoJuego_Escena(AdminEstadosJuego gsm) {
         super(gsm);
         pajaro = new Pajaro(50, 200);
         camara.setToOrtho(false, FlappyBird.ANCHURA/2, FlappyBird.ALTURA/2);
         fondo2 = new Texture("mario.jpg");
+        suelo = new Texture("ground.png");
+        posicionSuelo1 = new Vector2(camara.position.x - camara.viewportWidth/2, -90);    //Posicion del suelo
+        posicionSuelo2 = new Vector2((camara.position.x - camara.viewportWidth/2) + suelo.getWidth(), -90);    //Posicion del suelo
         tuberias = new Array<>();
 
         for(int i = 1; i<= CONTADOR_TUBERIAS; i++){ //Agregar nuevas tuberias
@@ -66,10 +73,13 @@ public class EstadoJuego_Escena extends Estado{
         //pantalla cuando está el pájaro
         spriteBatch.draw(fondo2, camara.position.x- (camara.viewportWidth/2), camara.position.y- (camara.viewportHeight/2));
         spriteBatch.draw(pajaro.getPajaro(), pajaro.getPosicion().x, pajaro.getPosicion().y);
+
         for (Tuberia tuberia : tuberias){
             spriteBatch.draw(tuberia.getTopTuberia(), tuberia.getPosicionTopTuberia().x, tuberia.getPosicionTopTuberia().y);//Tuberia superior
             spriteBatch.draw(tuberia.getDownTuberia(), tuberia.getPosicionDownTuberia().x, tuberia.getPosicionDownTuberia().y);//Tuberia inferior
         }
+        spriteBatch.draw(suelo, posicionSuelo1.x, posicionSuelo1.y);
+        spriteBatch.draw(suelo, posicionSuelo2.x, posicionSuelo2.y);
         spriteBatch.end();
     }
 
