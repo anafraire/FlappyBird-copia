@@ -48,6 +48,10 @@ public class EstadoJuego_Escena extends Estado{
             if(camara.position.x - (camara.viewportHeight/2) > tuberia.getPosicionTopTuberia().x + tuberia.getTopTuberia().getWidth()){
                 tuberia.reposicion(tuberia.getPosicionTopTuberia().x + (Tuberia.ANCHURA_TUBERIA + ESPACIO_TUBERIAS) * CONTADOR_TUBERIAS);
             }
+
+            if(tuberia.colision(pajaro.getContorno())){     //Cuando el pajaro choque
+                gsm.set(new EstadoJuego_Escena(gsm));     //Comenzamos de nuevo la partida
+            }
         }
 
         camara.update();
