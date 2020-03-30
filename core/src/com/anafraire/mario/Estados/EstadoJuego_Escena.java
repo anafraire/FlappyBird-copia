@@ -76,7 +76,7 @@ public class EstadoJuego_Escena extends Estado{
         spriteBatch.begin();
         //pantalla cuando está el pájaro
         spriteBatch.draw(fondo2, camara.position.x- (camara.viewportWidth/2), camara.position.y- (camara.viewportHeight/2));
-        spriteBatch.draw(pajaro.getPajaro(), pajaro.getPosicion().x, pajaro.getPosicion().y);
+        spriteBatch.draw(pajaro.getTextura(), pajaro.getPosicion().x, pajaro.getPosicion().y);
 
         for (Tuberia tuberia : tuberias){
             spriteBatch.draw(tuberia.getTopTuberia(), tuberia.getPosicionTopTuberia().x, tuberia.getPosicionTopTuberia().y);//Tuberia superior
