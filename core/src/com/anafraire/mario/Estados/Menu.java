@@ -13,7 +13,7 @@ public class Menu extends Estado{
 
     public Menu(AdminEstadosJuego adminEstadosJuego) {
         super(adminEstadosJuego);
-        fondo = new Texture("mario.jpg");
+        fondo = new Texture("bg.png");
         boton = new Texture("playbtn.png");
 
     }
@@ -22,7 +22,6 @@ public class Menu extends Estado{
     public void handleInput() { //Cuando interactuamos con el juego, ej: clic
         if (Gdx.input.justTouched()){
             gsm.set(new EstadoJuego_Escena(gsm));
-            dispose();
         }
     }
 
@@ -48,5 +47,6 @@ public class Menu extends Estado{
         // este espacio de la memoria en otra cosa
         fondo.dispose();
         boton.dispose();
+        System.out.println("ESTADO DE JUEGO DISPONIBLE");
     }
 }
