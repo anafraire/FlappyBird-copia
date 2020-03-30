@@ -20,6 +20,7 @@ public class EstadoJuego_Escena extends Estado{
     private Texture suelo;
     private Vector2 posicionSuelo1; //Posicion del suelo primera vez
     private Vector2 posicionSuelo2; //Posicion del suelo segunda vez
+    private static final int SUELO_Y_OFFSET = -90;
 
     public EstadoJuego_Escena(AdminEstadosJuego gsm) {
         super(gsm);
@@ -27,8 +28,8 @@ public class EstadoJuego_Escena extends Estado{
         camara.setToOrtho(false, FlappyBird.ANCHURA/2, FlappyBird.ALTURA/2);
         fondo2 = new Texture("mario.jpg");
         suelo = new Texture("ground.png");
-        posicionSuelo1 = new Vector2(camara.position.x - camara.viewportWidth/2, -90);    //Posicion del suelo
-        posicionSuelo2 = new Vector2((camara.position.x - camara.viewportWidth/2) + suelo.getWidth(), -90);    //Posicion del suelo
+        posicionSuelo1 = new Vector2(camara.position.x - camara.viewportWidth/2, SUELO_Y_OFFSET);    //Posicion del suelo
+        posicionSuelo2 = new Vector2((camara.position.x - camara.viewportWidth/2) + suelo.getWidth(), SUELO_Y_OFFSET);    //Posicion del suelo
         tuberias = new Array<>();
 
         for(int i = 1; i<= CONTADOR_TUBERIAS; i++){ //Agregar nuevas tuberias
@@ -46,6 +47,7 @@ public class EstadoJuego_Escena extends Estado{
     @Override
     public void update(float deltaTime) {
         handleInput();
+        updateSuelo();
         pajaro.update(deltaTime);
 
         camara.position.x = pajaro.getPosicion().x + 80;    //camara del juego
@@ -62,7 +64,9 @@ public class EstadoJuego_Escena extends Estado{
                 gsm.set(new EstadoJuego_Escena(gsm));     //Comenzamos de nuevo la partida
             }
         }
-
+        if(pajaro.getPosicion().y <= suelo.getHeight() + SUELO_Y_OFFSET){   //Desaparecer el pajaro cuando toque el suelo
+            gsm.set(new EstadoJuego_Escena(gsm));   //Reiniciar partida cuando toque el suelo
+        }
         camara.update();
     }
 
@@ -84,12 +88,22 @@ public class EstadoJuego_Escena extends Estado{
     }
 
     @Override
-    public void dispose() {
+    public void dispose() { //Liberar espacio de la memoria
         fondo2.dispose();
+        suelo.dispose();
         pajaro.dispose();
         for(Tuberia tuberia : tuberias){
             tuberia.dispose();
         }
         System.out.println("ESTADO DE JUEGO DISPONIBLE");
+    }
+
+    private void updateSuelo(){ //Poner el suelo infinito hacia la derecha sin ningun corte
+        if(camara.position.x - (camara.viewportWidth/2) > posicionSuelo1.x + suelo.getWidth()){  //Inicio de nuestra camara
+            posicionSuelo1.add(suelo.getWidth() * 2, 0);   //Agregar el ancho de nuestro suelo hacia la derecha
+        }
+        if(camara.position.x - (camara.viewportWidth/2) > posicionSuelo2.x + suelo.getWidth()){  //Inicio de nuestra camara
+            posicionSuelo2.add(suelo.getWidth() * 2, 0);   //Agregar el ancho de nuestro suelo hacia la derecha
+        }
     }
 }
