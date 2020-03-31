@@ -13,6 +13,7 @@ public class Menu extends Estado{
 
     public Menu(AdminEstadosJuego adminEstadosJuego) {
         super(adminEstadosJuego);
+        camara.setToOrtho(false, FlappyBird.ANCHURA/2, FlappyBird.ALTURA/2);
         fondo = new Texture("bg.png");
         boton = new Texture("playbtn.png");
 
@@ -35,9 +36,10 @@ public class Menu extends Estado{
 
     //    Gdx.gl.glClearColor(0,0,1,1);
     //    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);   //Resetea la pantalla
+        spriteBatch.setProjectionMatrix(camara.combined);
         spriteBatch.begin();
-        spriteBatch.draw(fondo, 0, 0, FlappyBird.ANCHURA, FlappyBird.ALTURA); //pantalla inicial
-        spriteBatch.draw(boton, (FlappyBird.ANCHURA/2) - (boton.getWidth()/2), (FlappyBird.ALTURA/2) - (boton.getHeight())/2);
+        spriteBatch.draw(fondo, 0, 0); //pantalla inicial
+        spriteBatch.draw(boton, camara.position.x - boton.getWidth()/2, camara.position.y);
         spriteBatch.end();
 
     }
