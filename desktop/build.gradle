@@ -35,6 +35,10 @@ task dist(type: Jar) {
     with jar
 }
 
+dependencies {
+    implementation 'androidx.sqlite:sqlite:2.1.0'
+}
+
 
 dist.dependsOn classes
 
