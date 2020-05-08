@@ -120,7 +120,7 @@ public class Principal extends Estado {
         }
         camara.update(); 
     }
-    
+
 
     @Override
     public void render(SpriteBatch spriteBatch) {   //Elementos en la pantalla de juego
