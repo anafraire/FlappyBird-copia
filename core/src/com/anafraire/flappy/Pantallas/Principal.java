@@ -118,7 +118,7 @@ public class Principal extends Estado {
             gameover = true;
             //gsm.set(new EstadoJuego_Escena(gsm));   //Reiniciar partida cuando toque el suelo
         }
-        camara.update();
+        camara.update(); 
     }
 
     @Override
