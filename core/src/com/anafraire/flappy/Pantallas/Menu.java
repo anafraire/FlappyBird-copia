@@ -47,7 +47,6 @@ public class Menu extends Estado {
     @Override
     public void dispose() { //Cuando se quite la imagen de menú, va a liberar estas dos variables y usar este espacio de la memoria en otra cosa
         fondo.dispose();
-        //fondo2.dispose();
         boton.dispose();
         System.out.println("ESTADO DE JUEGO DISPONIBLE");
 

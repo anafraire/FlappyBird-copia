@@ -6,6 +6,7 @@ import com.anafraire.flappy.Juego;
 import com.anafraire.flappy.Objetos.Pajaro;
 import com.anafraire.flappy.Objetos.Tuberia;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -31,6 +32,7 @@ public class Principal extends Estado {
 
     public  int cont;
     private int cont2;
+    private Sound marcador;
 
     private BitmapFont colorLetra;
     private BitmapFont fuente;
@@ -44,6 +46,7 @@ public class Principal extends Estado {
         pantallaFinal = new Texture("gameover.png");
         cont = 0;
         cont2 = 0;
+        marcador = Gdx.audio.newSound(Gdx.files.internal("contador.mp3"));
         colorLetra = new BitmapFont();
         colorLetra.setColor(Color.BLACK);
         fuente = new BitmapFont(Gdx.files.internal("flappy.fnt"),Gdx.files.internal("flappy.png"), false);
@@ -97,16 +100,15 @@ public class Principal extends Estado {
             if ((int) pajaro.getPosicion().x > (int) tuberias.get(cont2).posicionTopTuberia.x) {
                 cont2 = cont2 + 1;
                 cont = cont + 1;
-                if (cont2 == 5) {
-                    cont2 = 0;
-                }
+                marcador.play(0.1f);
+                if (cont2 == 5) { cont2 = 0; }
 
                 //Manera 2: dividir la posicion de la tuberia entre 177 ya que las tuberias incrementan en 177
                 //Manera 3: Coger la posicion del pajaro y dividir entre 177
 
                 System.out.println("contador: " + cont);
-                System.out.println("pos pajaro x" + pajaro.getPosicion().x);
-                System.out.println("pos tuberia x" + tuberias.get(cont2).posicionTopTuberia.x);
+                System.out.println("pos pajaro x" + (int)pajaro.getPosicion().x);
+                System.out.println("pos tuberia x" + (int)tuberias.get(cont2).posicionTopTuberia.x);
             }
         }
             //contadorOK=false;
@@ -151,6 +153,7 @@ public class Principal extends Estado {
         suelo.dispose();
         pajaro.dispose();
         fuente.dispose();
+        marcador.dispose();
 
         for(Tuberia tuberia : tuberias){
             tuberia.dispose();
