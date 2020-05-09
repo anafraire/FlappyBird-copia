@@ -6,6 +6,7 @@ import com.anafraire.flappy.Juego;
 import com.anafraire.flappy.Objetos.Pajaro;
 import com.anafraire.flappy.Objetos.Tuberia;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,7 +20,6 @@ public class Principal extends Estado {
     private Pajaro pajaro;
     private Texture fondo2;
     private Texture suelo;
-    private Texture pantallaFinal;
 
     private static final int ESPACIO_TUBERIAS = 125;    //Espacio entre una tuberia y otra
     private static final int CONTADOR_TUBERIAS = 5; //Numero de tubos diferentes que salen por pantalla
@@ -30,12 +30,16 @@ public class Principal extends Estado {
     private static final int SUELO_Y_OFFSET = -60;
     public static boolean gameover;
 
-    public  int cont;
+    public int cont;
     private int cont2;
     private Sound marcador;
+    private int puntuacion;
 
     private BitmapFont colorLetra;
     private BitmapFont fuente;
+    private Texture pantallaFinal;
+
+    Preferences prefs = Gdx.app.getPreferences("My preferences");
 
     public Principal(AdminEstados gsm) {
         super(gsm);
@@ -144,6 +148,21 @@ public class Principal extends Estado {
             spriteBatch.draw(suelo, posicionSuelo2.x, posicionSuelo2.y);
             fuente.draw(spriteBatch, String.valueOf(cont), camara.position.x + 85 - pantallaFinal.getWidth() / 2, camara.position.y + 180);
         }
+
+        if(gameover){
+            int highscore = prefs.getInteger("High score",0);
+            if(highscore>cont){ // display highscore
+                System.out.print("contador " + cont);
+                System.out.print("highscore " + highscore);
+                fuente.draw(spriteBatch, String.valueOf("High: " + highscore), camara.position.x - pantallaFinal.getWidth() / 2, camara.position.y + 140);
+            }else{
+                // display yourCurrentScore
+                fuente.draw(spriteBatch, String.valueOf("Cont" +cont), camara.position.x + 85 - pantallaFinal.getWidth() / 2, camara.position.y + 180);
+                prefs.putInteger("High score", cont);
+                prefs.flush();
+            }
+        }
+
         spriteBatch.end();
     }
 

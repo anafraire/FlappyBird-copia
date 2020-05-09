@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
-
-
 public class Juego extends ApplicationAdapter {
 
 	public static final int ANCHURA = 480;
@@ -18,7 +16,7 @@ public class Juego extends ApplicationAdapter {
 	public static final String TITULO = "TFG FlappyBird";	//Titulo de la ventana de la ejecución
 	public static Sound musica;
 	public AdminEstados gsm;
-	private SpriteBatch batch;
+	public SpriteBatch batch;
 
 
 	@Override
@@ -37,6 +35,7 @@ public class Juego extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gsm.update(Gdx.graphics.getDeltaTime());	//Obtenemos el tiempo real del juego y lo actualizamos
 		gsm.render(batch);	//Optimizar el juego
+
 	}
 	
 	@Override
@@ -47,10 +46,6 @@ public class Juego extends ApplicationAdapter {
 
 	public static void startMusica(){
 		musica = Gdx.audio.newSound(Gdx.files.internal("music.mp3"));
-		musica.play(0.1f);
+		musica.play(0.10f);
 	}
-
-
-
-
 }
